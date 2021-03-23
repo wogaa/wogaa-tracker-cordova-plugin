@@ -7,8 +7,14 @@ var wogaatracker = {
     cordova.exec(successCallback, errorCallback, "WogaaTracker", "start", []);
   },
 
-  trackCustomScreen: function (successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "WogaaTracker", "trackCustomScreen", []);
+  trackCustomScreen: function (screenName, successCallback, errorCallback) {
+    cordova.exec(
+      successCallback,
+      errorCallback,
+      "WogaaTracker",
+      "trackCustomScreen",
+      [screenName]
+    );
   },
 };
 

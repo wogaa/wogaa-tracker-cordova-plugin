@@ -1,0 +1,26 @@
+{
+  "name": "wogaa-tracker-cordova-plugin",
+  "version": "1.3.1",
+  "description": "Wogaa Tracker Cordova Plugin",
+  "author": "yonghow",
+  "cordova": {
+    "id": "wogaa-tracker-cordova-plugin",
+    "platforms": "android"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wogaa/wogaa-tracker-cordova-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wogaa/wogaa-tracker-cordova-plugin/issues"
+  },
+  "homepage": "https://github.com/wogaa/wogaa-tracker-cordova-plugin#readme",
+  "keywords": [
+    "cordova",
+    "arr",
+    "integration",
+    "ionic",
+    "library"
+  ],
+  "license": "MIT"
+}
