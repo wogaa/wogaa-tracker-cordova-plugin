@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="wogaa-tracker-cordova" version="1.0.0">
+
+  <name>WogaaTracker</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.0.0"/>
+  </engines>
+
+  <js-module src="www/wogaa-tracker.js" name="WogaaTracker">
+    <clobbers target="window.plugins.wogaatracker" />
+  </js-module>
+
+  <platform name="android">
+    <source-file src="src/android/sg/wogaa/tracker/cordova/WogaaTracker.java" target-dir="src/sg/wogaa/tracker/cordova"/>
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="WogaaTracker">
+        <param name="android-package" value="sg.wogaa.tracker.cordova"/>
+      </feature>
+    </config-file>
+
+    <!--   	<config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  	</config-file> -->
+    <framework src="src/android/wogaa-tracker.gradle" custom="true" type="gradleReference"/>
+    <resource-file src="src/android/tracker-1.3.1.aar" target="libs/tracker-1.3.1.aar"/>
+
+  </platform>
+
+</plugin>
