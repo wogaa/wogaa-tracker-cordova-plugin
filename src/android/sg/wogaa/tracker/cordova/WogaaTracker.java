@@ -6,37 +6,29 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
-import com.it.textcounter.ReadText;
+import android.widget.Toast;
+
+import sg.wogaa.tracker.Environment;
+import sg.wogaa.tracker.Tracker;
 
 public class WogaaTracker extends CordovaPlugin{
 
-    private int MY_PERMISSIONS_REQUEST = 0;
-
-    private JSONArray arrayGPS = new JSONArray();
-    private JSONObject objGPS = new JSONObject();
-
     @Override
     public boolean execute(String action, JSONArray data, final CallbackContext callbackContext) throws JSONException {
-
         switch (action) {
-          case "check":
-            String testText = "Hello my Friend";
-            int count = ReadText.numVowels(testText);
-            callbackContext.success(count);
-            return true;
-            break;
-          
           case "start":
-
-            return true;
+            if(data.getString(0).equals("PRODUCTION")) {
+              Tracker.start(this.cordova.getActivity(), Environment.PRODUCTION);
+            } else {
+              Tracker.start(this.cordova.getActivity(), Environment.STAGING);
+            }
             break;
-
-          case "trackCustomScreen":
-            return true;
+          case "trackScreenView":
+            Tracker.trackScreenView(data.getString(0));
             break;
           default:
             return false;
-            break;
         }
+        return true;
     }
 }

@@ -1,18 +1,22 @@
 var wogaatracker = {
   check: function (successCallback, errorCallback) {
+    console.log("Called check function!");
     cordova.exec(successCallback, errorCallback, "WogaaTracker", "check", []);
+    alert("Executed cordova");
   },
+  start: function (environment, successCallback, errorCallback) {
+    // cordova.exec(successCallback, errorCallback, "WogaaTracker", "start", [
+    //   environment,
+    // ]);
 
-  start: function (successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, "WogaaTracker", "start", []);
+    cordova.exec(successCallback, errorCallback, "WogaaTracker", "start", ["STAGING"]);
   },
-
-  trackCustomScreen: function (screenName, successCallback, errorCallback) {
+  trackScreenView: function (screenName, successCallback, errorCallback) {
     cordova.exec(
       successCallback,
       errorCallback,
       "WogaaTracker",
-      "trackCustomScreen",
+      "trackScreenView",
       [screenName]
     );
   },

@@ -15,17 +15,27 @@
     <source-file src="src/android/sg/wogaa/tracker/cordova/WogaaTracker.java" target-dir="src/sg/wogaa/tracker/cordova"/>
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="WogaaTracker">
-        <param name="android-package" value="sg.wogaa.tracker.cordova"/>
+        <param name="android-package" value="sg.wogaa.tracker.cordova.WogaaTracker"/>
       </feature>
     </config-file>
-
-    <!--   	<config-file target="AndroidManifest.xml" parent="/*">
-      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-  	</config-file> -->
     <framework src="src/android/wogaa-tracker.gradle" custom="true" type="gradleReference"/>
-    <resource-file src="src/android/tracker-1.3.1.aar" target="libs/tracker-1.3.1.aar"/>
-
   </platform>
 
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="WogaaTracker">
+        <param name="ios-package" value="WogaaTracker" />
+      </feature>
+    </config-file>
+    <source-file src="src/ios/WogaaTracker.swift" />
+    <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
+    <podspec>
+      <config>
+        <source url="https://github.com/wogaa/Specs.git"/>
+      </config>
+      <pods use-frameworks="true">
+        <pod name="Tracker" spec="~> 1.3.1" />
+      </pods>
+    </podspec>
+  </platform>
 </plugin>
