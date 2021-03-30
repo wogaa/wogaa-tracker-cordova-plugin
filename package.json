@@ -5,7 +5,10 @@
   "author": "yonghow",
   "cordova": {
     "id": "wogaa-tracker-cordova-plugin",
-    "platforms": "android"
+    "platforms": [
+      "android",
+      "ios"
+    ]
   },
   "repository": {
     "type": "git",
@@ -17,9 +20,8 @@
   "homepage": "https://github.com/wogaa/wogaa-tracker-cordova-plugin#readme",
   "keywords": [
     "cordova",
-    "arr",
-    "integration",
-    "ionic",
+    "wogaa",
+    "tracker",
     "library"
   ],
   "license": "MIT"
