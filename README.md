@@ -8,40 +8,26 @@ This is a Wogaa Tracker Cordova plugin to integrate for your iOS and Android app
 - iOS
 
 ## Installation
-    cordova plugin add https://github.com/wogaa/cordova-plugin-aar-integration.git
-
-
-## Usage in javascript
-
-```js
-document.addEventListener("deviceready", onDeviceReady, false);
-
-function onDeviceReady() {
-  window.plugins.aarintegration.check(successCallback, errorCallback);
-}
-
-function successCallback(result) {
-  console.log(result);
-}
-
-function errorCallback(error) {
-  console.log(error);
-}
+```
+cordova plugin add https://github.com/wogaa/wogaa-tracker-cordova.git
 ```
 
-## Usage in typescript
+## Start Tracker
+In your deviceready event add the start tracker
 
-```ts
+### Staging
+```js
+window.plugins.wogaatracker.start("STAGING");
+```
 
-  (<any>window).plugins.aarintegration.check((a) => this.successCallback(a), (b) => this.errorCallback(b));
+### Production
+```js
+window.plugins.wogaatracker.start("PRODUCTION");
+```
 
+## Track Screen View
+In each of your screen, add the following code
 
-  successCallback(result) {
-    console.log(result);
-  }
-
-  errorCallback(error) {
-    console.log(error);
-  }
-
+```js
+window.plugins.wogaatracker.trackScreenView("Screen View Name");
 ```
