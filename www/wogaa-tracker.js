@@ -5,11 +5,9 @@ var wogaatracker = {
     alert("Executed cordova");
   },
   start: function (environment, successCallback, errorCallback) {
-    // cordova.exec(successCallback, errorCallback, "WogaaTracker", "start", [
-    //   environment,
-    // ]);
-
-    cordova.exec(successCallback, errorCallback, "WogaaTracker", "start", ["STAGING"]);
+    cordova.exec(successCallback, errorCallback, "WogaaTracker", "start", [
+      environment,
+    ]);
   },
   trackScreenView: function (screenName, successCallback, errorCallback) {
     cordova.exec(
