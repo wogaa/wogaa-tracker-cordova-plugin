@@ -9,7 +9,7 @@ This is a Wogaa Tracker Cordova plugin to integrate for your iOS and Android app
 
 ## Installation
 ```
-cordova plugin add https://github.com/wogaa/wogaa-tracker-cordova.git
+cordova plugin add https://github.com/wogaa/wogaa-tracker-cordova-plugin.git
 ```
 
 ## Start Tracker
