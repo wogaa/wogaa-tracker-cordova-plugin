@@ -17,5 +17,5 @@ repositories{
 }
 
 dependencies {
-    implementation 'sg.wogaa:tracker:1.3.+'
+    implementation 'sg.wogaa:tracker:1.4.+'
 }
