@@ -14,6 +14,8 @@ public class WogaaTracker : CDVPlugin {
   public func start(_ command: CDVInvokedUrlCommand) {
     let environment = command.argument(at: 0) as! String
 
+    Tracker.setAutotrackScreenViews(enabled: false)
+
     if environment != nil && environment.count > 0 && environment.lowercased() == "production" {
       Tracker.start(for: .production)
     } else {

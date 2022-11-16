@@ -36,5 +36,3 @@ In each of your screen, add the following code
 ```js
 window.plugins.wogaatracker.trackScreenView("Screen View Name");
 ```
-
-## Testing

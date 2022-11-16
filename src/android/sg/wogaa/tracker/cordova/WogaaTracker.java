@@ -10,18 +10,24 @@ import android.widget.Toast;
 
 import sg.wogaa.tracker.Environment;
 import sg.wogaa.tracker.Tracker;
+import sg.wogaa.tracker.TrackerConfig;
 
 public class WogaaTracker extends CordovaPlugin{
 
     @Override
     public boolean execute(String action, JSONArray data, final CallbackContext callbackContext) throws JSONException {
+        TrackerConfig trackerConfig = new TrackerConfig();
+        trackerConfig.setScreenviewEventsEnabled(false);
+
+        if(data.getString(0).equals("PRODUCTION")) {
+          trackerConfig.setEnvironment(Environment.PRODUCTION);
+        } else {
+          trackerConfig.setEnvironment(Environment.STAGING);
+        }
+
         switch (action) {
           case "start":
-            if(data.getString(0).equals("PRODUCTION")) {
-              Tracker.start(this.cordova.getActivity(), Environment.PRODUCTION);
-            } else {
-              Tracker.start(this.cordova.getActivity(), Environment.STAGING);
-            }
+            Tracker.start(this.cordova.getActivity(), trackerConfig);
             break;
           case "trackScreenView":
             Tracker.trackScreenView(data.getString(0));
