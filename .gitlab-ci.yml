@@ -1,23 +1,23 @@
 stages: 
-  - prue-remote
+  - prune-remote
   - update-remote
 
 workflow:
   rules:
     - if: $CI_COMMIT_TAG
 
-.macos_runners:
-  tags:
-    - ios
-    - mac-intel
-
-prune-remote:
-  stage: prue-remote
+set-github-origin:
+  stage: prune-remote
+  before_script:
+    - rm -rf .git
   script:
-    - git remote update --prune
+    - git init
+    - git remote add origin ${GITHUB_URL}
 
 update-remote:
   stage: update-remote
+  needs: 
+    - set-github-origin
   script:
-    - git push --mirror ${GITHUB_URL}
+    - git add . -- ':!.gitlab-ci.yml'
   when: manual
