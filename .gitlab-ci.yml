@@ -28,7 +28,7 @@ update-remote:
     - set-github-origin
   script:
     - ls -al
-    - cp -r  * /wogaa-tracker-cordova-plugin
+    - cp -r  * ./wogaa-tracker-cordova-plugin
     - cd wogaa-tracker-cordova-plugin
     - sh ../update-github-remote.sh
   when: manual
