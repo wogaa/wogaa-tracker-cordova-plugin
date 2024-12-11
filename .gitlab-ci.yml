@@ -10,16 +10,13 @@ image: registry.sgts.gitlab-dedicated.com/wog/gvt/wogaa/projects/cicd-images/alp
 
 cache:
   paths:
-    - "github-remote"
+    - "wogaa-tracker-cordova-plugin"
 
 set-github-origin:
   stage: prune-remote
   before_script:
     - rm -rf .git
-    - mkdir github-remote
-    - cd github-remote
   script:
-    - git init
     - git config --global user.email "wogaa@tech.gov.sg"
     - git config --global user.name "WOGAA gitlab CICD"
     - git clone https://github.com/wogaa/wogaa-tracker-cordova-plugin.git
@@ -29,7 +26,7 @@ update-remote:
   needs: 
     - set-github-origin
   script:
-    - cp -r / /github-remote
-    - cd github-remote
+    - cp -r / /wogaa-tracker-cordova-plugin
+    - cd wogaa-tracker-cordova-plugin
     - sh ../update-github-remote.sh
   when: manual
