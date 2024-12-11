@@ -16,7 +16,7 @@ set-github-origin:
     - git init
     - git config --global user.email "wogaa@tech.gov.sg"
     - git config --global user.name "WOGAA gitlab CICD"
-    - git remote add origin ${GITHUB_URL}
+    - git remote add github ${GITHUB_URL}
 
 update-remote:
   stage: update-remote
