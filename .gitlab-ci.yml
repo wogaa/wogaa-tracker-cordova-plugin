@@ -5,9 +5,6 @@ stages:
 workflow:
   rules:
     - if: $CI_COMMIT_TAG
-    - if: $CI_PIPELINE_SOURCE == 'web'
-    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
-    - if: $CI_DEFAULT_BRANCH == $CI_COMMIT_BRANCH
 
 .macos_runners:
   tags:
@@ -18,13 +15,9 @@ prune-remote:
   stage: prue-remote
   script:
     - git remote update --prune
-  extends:
-    - .macos_runners
 
 update-remote:
   stage: update-remote
   script:
-    - git push git push --mirror ${PUBLIC_URL}
-  extends:
-    - .macos_runners
+    - git push --mirror ${GITHUB_URL}
   when: manual
