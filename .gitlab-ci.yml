@@ -8,20 +8,27 @@ workflow:
 
 image: registry.sgts.gitlab-dedicated.com/wog/gvt/wogaa/projects/cicd-images/alpine-3.19-node-20:v1.0.2
 
+cache:
+  paths:
+    - "github-remote"
+
 set-github-origin:
   stage: prune-remote
   before_script:
     - rm -rf .git
+    - mkdir github-remote
+    - cd github-remote
   script:
     - git init
     - git config --global user.email "wogaa@tech.gov.sg"
     - git config --global user.name "WOGAA gitlab CICD"
-    - git remote add github ${GITHUB_URL}
+    - git clone https://github.com/wogaa/wogaa-tracker-cordova-plugin.git
 
 update-remote:
   stage: update-remote
   needs: 
     - set-github-origin
   script:
-    - sh ./update-github-remote.sh
+    - cd github-remote
+    - sh ../update-github-remote.sh
   when: manual
