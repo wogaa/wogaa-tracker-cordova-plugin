@@ -19,5 +19,5 @@ update-remote:
   needs: 
     - set-github-origin
   script:
-    - git add . -- ':!.gitlab-ci.yml'
+    - git add . -- ':!.gitlab-ci.yml' ':!update-github-remote.sh'
   when: manual
