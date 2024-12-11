@@ -6,6 +6,8 @@ workflow:
   rules:
     - if: $CI_COMMIT_TAG
 
+image: registry.sgts.gitlab-dedicated.com/wog/gvt/wogaa/projects/cicd-images/alpine-3.19-node-20:v1.0.2
+
 set-github-origin:
   stage: prune-remote
   before_script:
