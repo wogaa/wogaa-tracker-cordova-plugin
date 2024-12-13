@@ -1,6 +1,6 @@
 # wogaa-tracker-cordova
 
-This is a Wogaa Tracker Cordova plugin to integrate for your iOS and Android app
+This is a Wogaa Tracker Cordova plugin to integrate for your iOS and Android app.
 
 ## Supported Platforms
 
