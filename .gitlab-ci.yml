@@ -6,26 +6,22 @@ include:
       - "jobs/common/nexus-iq-scan.yml"
       - "vars/.gitlab-cdk-vars.yml"
 
-stages:
-  - .pre
-  - build
+stages: 
+  - prune-remote
+  - update-remote
 
 workflow:
   rules:
     - if: $CI_COMMIT_TAG
+    - if: $CI_DEFAULT_BRANCH == $CI_COMMIT_BRANCH
     - if: $CI_PIPELINE_SOURCE == "web"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_DEFAULT_BRANCH == $CI_COMMIT_BRANCH
 
+image: registry.sgts.gitlab-dedicated.com/wog/gvt/wogaa/projects/cicd-images/alpine-3.19-node-20:v1.0.2
 
-.ci-variables:
-  variables: !reference [.aws-vars, ci]
-.stg-variables:
-  variables: !reference [.aws-vars, preprod]
-.prd-variables:
-  variables: !reference [.aws-vars, prd]
-
-image: registry.sgts.gitlab-dedicated.com/wog/gvt/wogaa/projects/cicd-images/alpine-3.18.0-node-18-aws-cdk-2:v1.0.0
+cache:
+  paths:
+    - "wogaa-tracker-cordova-plugin"
 
 
 nexus-iq-scan-job:
@@ -81,5 +77,26 @@ nexus-iq-scan-job:
     - cat package.json
     - npm install --production
   variables:
-    NEXUS_IQ_PROJECT_ID: "oobee-scan"
+    NEXUS_IQ_PROJECT_ID: "wogaa-cordova-tracker"
+
+
+set-github-origin:
+  stage: prune-remote
+  before_script:
+    - rm -rf .git
+  script:
+    - git config --global user.email "wogaa@tech.gov.sg"
+    - git config --global user.name "WOGAA gitlab CICD"
+    - git clone https://github.com/wogaa/wogaa-tracker-cordova-plugin.git
+
+update-remote:
+  stage: update-remote
+  needs: 
+    - set-github-origin
+  script:
+    - ls -al
+    - cp -r  * ./wogaa-tracker-cordova-plugin
+    - cd wogaa-tracker-cordova-plugin
+    - sh ../update-github-remote.sh
+  when: manual
 
