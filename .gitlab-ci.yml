@@ -7,6 +7,7 @@ include:
       - "vars/.gitlab-cdk-vars.yml"
 
 stages:
+  - .pre
   - build
 
 workflow:
@@ -25,7 +26,6 @@ workflow:
   variables: !reference [.aws-vars, prd]
 
 image: registry.sgts.gitlab-dedicated.com/wog/gvt/wogaa/projects/cicd-images/alpine-3.18.0-node-18-aws-cdk-2:v1.0.0
-
 
 
 nexus-iq-scan-job:
