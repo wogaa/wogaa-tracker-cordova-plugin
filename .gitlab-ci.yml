@@ -1,0 +1,83 @@
+include:
+  - project: "wog/gvt/wogaa/projects/git-lab-templates"
+    ref: main
+    file:
+      - "jobs/common/trigger-rules.yml"
+      - "jobs/common/nexus-iq-scan.yml"
+      - "vars/.gitlab-cdk-vars.yml"
+
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_TAG
+    - if: $CI_PIPELINE_SOURCE == "web"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_DEFAULT_BRANCH == $CI_COMMIT_BRANCH
+
+
+.ci-variables:
+  variables: !reference [.aws-vars, ci]
+.stg-variables:
+  variables: !reference [.aws-vars, preprod]
+.prd-variables:
+  variables: !reference [.aws-vars, prd]
+
+image: registry.sgts.gitlab-dedicated.com/wog/gvt/wogaa/projects/cicd-images/alpine-3.18.0-node-18-aws-cdk-2:v1.0.0
+
+
+
+nexus-iq-scan-job:
+  extends:
+    - .nexus-iq-scan-npm
+  before_script:
+    - echo "File Generation"
+    - |
+      export JS_FILE="merge.js"
+
+      # Generate a JavaScript file
+      cat <<EOL > $JS_FILE
+      const fs = require("fs");
+
+      // Define the input package.json files
+      const packageFiles = ["./package.json"];
+      const outputFile = "package.json";
+
+      // Function to merge two JSON objects (handling dependencies)
+      function mergeObjects(target, source) {
+          for (const key in source) {
+              if (typeof source[key] === "object" && !Array.isArray(source[key])) {
+                  target[key] = mergeObjects(target[key] || {}, source[key]);
+              } else {
+                  target[key] = source[key]; // Overwrites existing fields
+              }
+          }
+          return target;
+      }
+
+      // Read and merge package.json files
+      let mergedPackage = {};
+      packageFiles.forEach((file) => {
+          if (fs.existsSync(file)) {
+              const packageData = JSON.parse(fs.readFileSync(file, "utf8"));
+              mergedPackage = mergeObjects(mergedPackage, packageData);
+          } else {
+              console.warn(`Warning: ${file} not found.`);
+          }
+      });
+
+      // Write the merged output
+      fs.writeFileSync(outputFile, JSON.stringify(mergedPackage, null, 2));
+      console.log(`Merged package.json written to ${outputFile}`);
+      EOL
+
+      echo "JavaScript file '$JS_FILE' generated successfully."
+
+      # Run the generated JavaScript file using Node.js
+      node $JS_FILE
+    - echo "Nexus Generation Complete"
+    - ls -lah
+    - cat package.json
+    - npm install --production
+  variables:
+    NEXUS_IQ_PROJECT_ID: "oobee-scan"
+
