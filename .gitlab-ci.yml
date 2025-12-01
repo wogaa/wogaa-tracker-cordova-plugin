@@ -77,7 +77,7 @@ nexus-iq-scan-job:
     - cat package.json
     - npm install --production
   variables:
-    NEXUS_IQ_PROJECT_ID: "wogaa-cordova-tracker"
+    NEXUS_IQ_PROJECT_ID: "wogaa_wogaa-cordova-tracker"
 
 
 set-github-origin:
