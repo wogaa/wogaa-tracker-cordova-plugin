@@ -80,23 +80,23 @@ nexus-iq-scan-job:
     NEXUS_IQ_PROJECT_ID: "wogaa-cordova-tracker"
 
 
-set-github-origin:
-  stage: prune-remote
-  before_script:
-    - rm -rf .git
-  script:
-    - git config --global user.email "wogaa@tech.gov.sg"
-    - git config --global user.name "WOGAA gitlab CICD"
-    - git clone https://github.com/wogaa/wogaa-tracker-cordova-plugin.git
+# set-github-origin:
+#   stage: prune-remote
+#   before_script:
+#     - rm -rf .git
+#   script:
+#     - git config --global user.email "wogaa@tech.gov.sg"
+#     - git config --global user.name "WOGAA gitlab CICD"
+#     - git clone https://github.com/wogaa/wogaa-tracker-cordova-plugin.git
 
-update-remote:
-  stage: update-remote
-  needs: 
-    - set-github-origin
-  script:
-    - ls -al
-    - cp -r  * ./wogaa-tracker-cordova-plugin
-    - cd wogaa-tracker-cordova-plugin
-    - sh ../update-github-remote.sh
-  when: manual
+# update-remote:
+#   stage: update-remote
+#   needs: 
+#     - set-github-origin
+#   script:
+#     - ls -al
+#     - cp -r  * ./wogaa-tracker-cordova-plugin
+#     - cd wogaa-tracker-cordova-plugin
+#     - sh ../update-github-remote.sh
+#   when: manual
 
