@@ -6,6 +6,8 @@ include:
       - "jobs/common/nexus-iq-scan.yml"
       - "vars/.gitlab-cdk-vars.yml"
 
+stages:
+  - build
 
 workflow:
   rules:
