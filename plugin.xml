@@ -34,7 +34,7 @@
         <source url="https://github.com/wogaa/Specs.git"/>
       </config>
       <pods use-frameworks="true">
-        <pod name="Tracker" spec="~> 4.1.0" />
+        <pod name="Tracker" spec="~> 6.1.2" />
       </pods>
     </podspec>
   </platform>
